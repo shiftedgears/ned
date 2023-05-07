@@ -12,6 +12,8 @@ int main(int argc, char **argv){
    strcpy(quit, "q");
    char read[2];
    strcpy(read, "r");
+   char load[2];
+   strcpy(load, "l");
 
    char cmd[10]; //var to hold user command
    strcpy(cmd, "t");
@@ -31,7 +33,10 @@ int main(int argc, char **argv){
       if(strcmp(cmd, quit) == 0){ //if user wants to quit, break
          break;
       }
-      else if(strcmp(cmd, read) == 0){ //read file contents
+      else if(strcmp(cmd, load) == 0){//loading a new file to read/write
+	scanf("%s", file_name); //wait for user to type the file to "load" (just changes active file_name)
+      }
+      else if(strcmp(cmd, read) == 0){ //if user wants to read file
           
           f_r = fopen(file_name, "r"); //open file in read mode
           
@@ -46,12 +51,19 @@ int main(int argc, char **argv){
                   line++;
               }
               
-              fclose(f_r);
+              fclose(f_r); //close file
           }
       }
       else{
          printf("?\n");
       }
+   }
+
+   if(f_r){ //cleanup pointers
+     fclose(f_r);
+   }
+   if(f_w){
+     fclose(f_w);
    }
 
    return 0;
