@@ -2,3 +2,5 @@
 *.out
 # ignore test text files
 *.txt
+# ignore emacs backup files
+*~
